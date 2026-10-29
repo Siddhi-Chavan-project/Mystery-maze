@@ -1,0 +1,283 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#080b14" />
+
+  <title>Mystery Maze | The Lost Temple</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <div class="ambient ambient-one"></div>
+  <div class="ambient ambient-two"></div>
+
+  <main class="game-shell">
+
+    <!-- HEADER -->
+    <header class="topbar">
+      <a class="brand" href="#" aria-label="Mystery Maze home">
+        <span class="brand-icon">✦</span>
+        <span>MYSTERY MAZE</span>
+      </a>
+
+      <span class="chapter">
+        CHAPTER I <span class="chapter-dot">·</span> THE LOST TEMPLE
+      </span>
+
+      <button id="pauseBtn" class="small-btn" hidden>
+        Ⅱ Pause
+      </button>
+    </header>
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-symbol">✧</div>
+
+      <p class="eyebrow">
+        <span class="eyebrow-line"></span>
+        AN ANCIENT SECRET AWAITS
+        <span class="eyebrow-line"></span>
+      </p>
+
+      <h1>
+        THE LOST
+        <span>TEMPLE</span>
+      </h1>
+
+      <p class="subtitle">
+        The walls remember. The darkness watches.
+        <br />
+        Find the key before the temple claims you.
+      </p>
+
+      <div class="hero-tags">
+        <span>✦ 5 CHALLENGING LEVELS</span>
+        <span>⚿ ANCIENT RELICS</span>
+        <span>☠ CURSED CHAMBERS</span>
+      </div>
+    </section>
+
+    <!-- GAME -->
+    <section class="game-panel">
+
+      <!-- HUD -->
+      <div class="hud">
+
+        <div class="hud-item">
+          <span class="hud-label">CURRENT LEVEL</span>
+          <strong id="levelDisplay">01 / 05</strong>
+          <small id="levelName">The Forgotten Entrance</small>
+        </div>
+
+        <div class="hud-item">
+          <span class="hud-label">LIVES REMAINING</span>
+          <strong id="lives" class="lives-value">♥ ♥ ♥</strong>
+          <small>Choose your path wisely</small>
+        </div>
+
+        <div class="hud-item">
+          <span class="hud-label">ANCIENT KEY</span>
+          <strong id="keyStatus" class="key-value">0/1 KEYS</strong>
+          <small>Unlock the temple gate</small>
+        </div>
+
+        <div class="hud-item">
+          <span class="hud-label">TIME REMAINING</span>
+          <strong id="timer" class="timer-value">02:00</strong>
+          <small>Time is running out</small>
+        </div>
+
+      </div>
+
+      <!-- MAZE -->
+      <div class="canvas-wrap">
+
+        <canvas
+          id="gameCanvas"
+          width="520"
+          height="360"
+          aria-label="Mystery Maze game board"
+          role="img"
+        ></canvas>
+
+        <!-- START SCREEN -->
+        <div id="startScreen" class="overlay">
+          <div class="overlay-content">
+
+            <div class="rune">✧</div>
+
+            <p class="eyebrow">YOUR JOURNEY BEGINS</p>
+
+            <h2>Enter the Unknown</h2>
+
+            <p class="overlay-description">
+              Ancient corridors hide forgotten treasures.
+              Find the key, survive the cursed chambers,
+              and uncover the secrets of the lost temple.
+            </p>
+
+            <div class="mission-stats">
+              <div>
+                <strong>05</strong>
+                <span>LEVELS</span>
+              </div>
+
+              <div>
+                <strong>03</strong>
+                <span>LIVES</span>
+              </div>
+
+              <div>
+                <strong>02:00</strong>
+                <span>START TIME</span>
+              </div>
+            </div>
+
+            <button id="startBtn" class="primary-btn">
+              ENTER THE TEMPLE <span>→</span>
+            </button>
+
+            <p class="hint">
+              USE WASD OR ARROW KEYS TO MOVE
+            </p>
+
+          </div>
+        </div>
+
+        <!-- BETWEEN-LEVEL SCREEN -->
+        <div id="messageScreen" class="overlay" hidden>
+          <div class="overlay-content">
+
+            <div id="messageIcon" class="rune">✧</div>
+
+            <p id="messageEyebrow" class="eyebrow">
+              CHAPTER CLEARED
+            </p>
+
+            <h2 id="messageTitle">Level Complete</h2>
+
+            <p id="messageText" class="overlay-description">
+              You escaped the maze.
+            </p>
+
+            <button id="messageBtn" class="primary-btn">
+              NEXT LEVEL <span>→</span>
+            </button>
+
+            <p class="hint">
+              THE NEXT CHAMBER AWAITS
+            </p>
+
+          </div>
+        </div>
+
+        <!-- VICTORY / GAME OVER SCREEN -->
+        <div id="endScreen" class="overlay" hidden>
+          <div class="overlay-content">
+
+            <div id="endIcon" class="rune">✦</div>
+
+            <p id="endEyebrow" class="eyebrow">
+              THE TEMPLE DECIDES
+            </p>
+
+            <h2 id="endTitle">Journey Complete</h2>
+
+            <p id="endMessage" class="overlay-description">
+              Your story continues...
+            </p>
+
+            <button id="restartBtn" class="primary-btn">
+              PLAY AGAIN <span>↻</span>
+            </button>
+
+            <p class="hint">
+              EVERY ENDING BEGINS ANOTHER JOURNEY
+            </p>
+
+          </div>
+        </div>
+
+      </div>
+
+      <!-- FOOTER -->
+      <footer class="game-footer">
+        <span class="system-status">
+          <i class="status-dot"></i>
+          TEMPLE SYSTEM ONLINE
+        </span>
+
+        <span id="gameStatus">
+          AWAITING EXPLORER
+        </span>
+      </footer>
+
+    </section>
+
+    <!-- INFORMATION CARDS -->
+    <section class="bottom-grid">
+
+      <article class="info-card">
+        <div class="card-icon">⌘</div>
+
+        <div>
+          <h3>Master the Controls</h3>
+          <p>
+            Use WASD or arrow keys to navigate.
+            Press P or Escape to pause your adventure.
+          </p>
+        </div>
+      </article>
+
+      <article class="info-card">
+        <div class="card-icon">⚿</div>
+
+        <div>
+          <h3>Discover the Secrets</h3>
+          <p>
+            Collect ancient keys, avoid cursed tiles,
+            find the lost relic, and reach each exit.
+          </p>
+        </div>
+      </article>
+
+      <article class="info-card">
+        <div class="card-icon">☠</div>
+
+        <div>
+          <h3>Survive the Darkness</h3>
+          <p>
+            You have three lives. Watch the timer
+            and beware of the Shadow Guardian.
+          </p>
+        </div>
+      </article>
+
+    </section>
+
+    <!-- FOOTER COPYRIGHT -->
+    <footer class="site-footer">
+      <span class="footer-star">✦</span>
+      MYSTERY MAZE © 2026
+      <span class="footer-divider">|</span>
+      EVERY SHADOW HIDES A STORY
+    </footer>
+
+  </main>
+<canvas id="gameCanvas" width="520" height="360"></canvas>
+<canvas id="confetti-canvas"></canvas>
+
+  <script src="game.js" defer></script>
+</body>
+</html>
